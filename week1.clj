@@ -28,6 +28,7 @@
 (= 3 (second [2 3 4]))
 (= 3 (last (list 1 2 3)))
 
+
 ;;; Day 2
 (= '(20 30 40) (rest [10 20 30 40]))
 
@@ -56,6 +57,7 @@
 (= 10 (let [x 4, y 6] (+ x y)))
 (= 4 (let [y 1, z 3] (+ y z)))
 (= 1 (let [z 1] z))
+
 
 ;;; Day 3
 (= "ABC" (apply str (re-seq #"[A-Z]+" "bA1B3Ce")))
@@ -91,3 +93,30 @@
 (= '(1 5 9 13 17 21 25 29 33 37)
    (for [[x y] (partition 2 (range 20))]
      (+ x y)))
+
+
+;;; Day 4
+(= (second (reverse (list 1 2 3 4 5))) 4)
+(= (second (reverse ["a" "b" "c"])) "b")
+(= (second (reverse [[1 2] [3 4]])) [1 2])
+
+(= (reduce + [1 2 3]) 6)
+(= (reduce + (list 0 -2 5 5)) 8)
+(= (reduce + #{4 2 1}) 7)
+(= (reduce + '(0 0 -1)) -1)
+(= (reduce + '(1 10 3)) 14)
+
+(= (remove even? #{1 2 3 4 5}) '(1 3 5))
+(= (filter (complement even?) [4 2 1 6]) '(1))
+(= (remove even? [2 2 4 6]) '())
+(= (filter (complement even?) [1 1 1 3]) '(1 1 1 3))
+
+(false? (= (reverse '(1 2 3 4 5)) '(1 2 3 4 5)))
+(true? (= (apply str (reverse "racecar")) "racecar"))
+(true? (= (reverse [:foo :bar :foo]) [:foo :bar :foo]))
+(true? (= (reverse '(1 1 3 3 1 1)) '(1 1 3 3 1 1)))
+(false? (= (reverse '(:a :b :c)) '(:a :b :c)))
+
+(= (#(flatten (for [e %] [e e])) [1 2 3]) '(1 1 2 2 3 3))
+(= (#(flatten (for [e %] [e e])) [:a :a :b :b]) '(:a :a :a :a :b :b :b :b))
+(= (#(for [e % s [e e]] s) [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
