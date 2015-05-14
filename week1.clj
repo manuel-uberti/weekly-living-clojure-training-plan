@@ -168,16 +168,17 @@
 (= (partition-by identity [[1 2] [1 2] [3 4]]) '(([1 2] [1 2]) ([3 4])))
 
 ;; Drop Every Nth Item
-(= ((fn [c n] (flatten (map (partial take (dec n)) (partition-all n c))))
-    [1 2 3 4 5 6 7 8] 3)
+(defn drop-nth [c n]
+  (for [c (partition-all n c)]
+    (take (dec n) c)))
+
+(= (flatten (drop-nth [1 2 3 4 5 6 7 8] 3))
    [1 2 4 5 7 8])
 
-(= ((fn [c n] (flatten (map (partial take (dec n)) (partition-all n c))))
-    [:a :b :c :d :e :f] 2)
+(= (flatten (drop-nth [:a :b :c :d :e :f] 2))
    [:a :c :e])
 
-(= ((fn [c n] (flatten (map (partial take (dec n)) (partition-all n c))))
-    [1 2 3 4 5 6] 4)
+(= (flatten (drop-nth [1 2 3 4 5 6] 4))
    [1 2 3 5 6])
 
 ;; Intro to Iterate
