@@ -1,4 +1,4 @@
-(ns living-clojure.week1)
+(ns weekly-living-clojure-training-plan.week1)
 
 ;;; Day 1
 ;; Intro to Strings
