@@ -48,3 +48,36 @@
 
 ;; Intro to Destructuring
 (= [2 4] (let [[a b c d e f g] (range)] [c e]))
+
+
+;;; Day 2
+;; Advanced Destructuring
+(= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d]  [1 2 3 4 5]] [a b c d]))
+
+;; A Half-Truth
+(defn half-truth [& args]
+  (cond
+    (every? false? args) false
+    (nil? (some false? args)) false
+    :else true))
+
+(= false (half-truth false false))
+(= true (half-truth true false))
+(= false (half-truth true))
+(= true (half-truth false true false))
+(= false (half-truth true true true))
+(= true (half-truth true true true false))
+
+;; Greatest Common Divisor
+(defn gcd [a b]
+  (cond
+    (= b 0) a
+    (= a 0) b
+    (= a b) a
+    (> a b) (gcd (- a b) b)
+    (< a b) (gcd a (- b a))))
+
+(= (gcd 2 4) 2)
+(= (gcd 10 5) 5)
+(= (gcd 5 7) 1)
+(= (gcd 1023 858) 33)
