@@ -81,3 +81,31 @@
 (= (gcd 10 5) 5)
 (= (gcd 5 7) 1)
 (= (gcd 1023 858) 33)
+
+
+;;; Day 3
+;; Simple closures
+(defn f [x]
+  (fn [n]
+    (reduce * (repeat x n))))
+
+(= 256 ((f 2) 16) ((f 8) 2))
+(= [1 8 27 64] (map (f 3) [1 2 3 4]))
+(= [1 2 4 8 16] (map #((f %) 2) [0 1 2 3 4]))
+
+;; Cartesian Product
+(defn cp [a b]
+  (into #{} (for [a a
+                  b b]
+              [a b])))
+
+(= (cp #{"ace" "king" "queen"} #{"spade" "heart" "diamond" "club"})
+   #{["ace"   "spade"] ["ace"   "heart"] ["ace"   "diamond"] ["ace"   "club"]
+     ["king"  "spade"] ["king"  "heart"] ["king"  "diamond"] ["king"  "club"]
+     ["queen" "spade"] ["queen" "heart"] ["queen" "diamond"] ["queen" "club"]})
+
+(= (cp #{1 2 3} #{4 5})
+   #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]})
+
+(= 300 (count (cp (into #{} (range 10))
+                  (into #{} (range 30)))))
