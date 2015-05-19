@@ -109,3 +109,25 @@
 
 (= 300 (count (cp (into #{} (range 10))
                   (into #{} (range 30)))))
+
+
+;;; Day 4
+;; Symmetric Difference
+(defn sd [a b]
+  (clojure.set/union (clojure.set/difference a b)
+                     (clojure.set/difference b a)))
+
+(= (sd #{1 2 3 4 5 6} #{1 3 5 7}) #{2 4 6 7})
+(= (sd #{:a :b :c} #{}) #{:a :b :c})
+(= (sd #{} #{4 5 6}) #{4 5 6})
+(= (sd #{[1 2] [2 3]} #{[2 3] [3 4]}) #{[1 2] [3 4]})
+
+;; Least Common Multiple
+(defn lcm [& args]
+  (reduce (fn [r x] (* (/ x (gcd r x)) r)) args))
+
+(== (lcm 2 3) 6)
+(== (lcm 5 3 7) 105)
+(== (lcm 1/3 2/5) 2)
+(== (lcm 3/4 1/6) 3/2)
+(== (lcm 7 5/7 2 3/5) 210)
