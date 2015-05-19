@@ -95,9 +95,7 @@
 
 ;; Cartesian Product
 (defn cp [a b]
-  (into #{} (for [a a
-                  b b]
-              [a b])))
+  (into #{} (for [a a b b] [a b])))
 
 (= (cp #{"ace" "king" "queen"} #{"spade" "heart" "diamond" "club"})
    #{["ace"   "spade"] ["ace"   "heart"] ["ace"   "diamond"] ["ace"   "club"]
