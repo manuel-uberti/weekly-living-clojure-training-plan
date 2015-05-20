@@ -133,7 +133,6 @@
 
 ;;; Day 5
 ;; Pascal's Triangle
-
 (defn pt [n]
   (if (= n 1)
     [1]
