@@ -87,10 +87,10 @@
     (let [p (take d s)
           r (drop d s)
           l (count s)]
-      (cond
-        (<= d l) (flatten (cons r p))
-        (> d l) (let [e (- d l)]
-                  (flatten (cons (drop e s) (take e s))))))
+      (if (<= d l)
+        (flatten (cons r p))
+        (let [e (- d l)]
+          (flatten (cons (drop e s) (take e s))))))
     (rotate (+ d (count s)) s)))
 
 (= (rotate 2 [1 2 3 4 5]) '(3 4 5 1 2))
