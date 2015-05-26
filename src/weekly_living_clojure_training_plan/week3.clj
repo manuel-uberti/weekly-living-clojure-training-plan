@@ -65,3 +65,40 @@
 (= (stree? [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
             [2 [3 nil [4 [6 nil nil] nil]] nil]])
    false)
+
+
+;;; Day 2
+;; Flipping out
+(defn flip [f]
+  (fn [& args]
+    (apply f (reverse args))))
+
+(= 3 ((flip nth) 2 [1 2 3 4 5]))
+
+(= true ((flip >) 7 8))
+
+(= 4 ((flip quot) 2 8))
+
+(= [1 2 3] ((flip take) [1 2 3 4 5] 3))
+
+;; Rotate a sequence
+(defn rotate [d s]
+  (if (> d 0)
+    (let [p (take d s)
+          r (drop d s)
+          l (count s)]
+      (cond
+        (<= d l) (flatten (cons r p))
+        (> d l) (let [e (- d l)]
+                  (flatten (cons (drop e s) (take e s))))))
+    (rotate (+ d (count s)) s)))
+
+(= (rotate 2 [1 2 3 4 5]) '(3 4 5 1 2))
+
+(= (rotate -2 [1 2 3 4 5]) '(4 5 1 2 3))
+
+(= (rotate 6 [1 2 3 4 5]) '(2 3 4 5 1))
+
+(= (rotate 1 '(:a :b :c)) '(:b :c :a))
+
+(= (rotate -4 '(:a :b :c)) '(:c :a :b))
