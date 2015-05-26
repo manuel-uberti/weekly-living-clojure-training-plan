@@ -33,7 +33,6 @@
 ;; Factorial Fun
 ;; (defn fact-1 [n]
 ;;   (* n (fact (dec n))))
-
 (defn fact [n]
   (loop [r 1
          n n]
