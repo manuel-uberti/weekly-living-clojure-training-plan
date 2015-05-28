@@ -124,3 +124,20 @@
 (= (set (split-by-type [:a "foo" "bar" :b])) #{[:a :b] ["foo" "bar"]})
 
 (= (set (split-by-type [[1 2] :a [3 4] 5 6 :b])) #{[[1 2] [3 4]] [:a :b] [5 6]})
+
+
+;;; Day 4
+;; Prime Numbers
+(def whole-numbers (iterate inc 2))
+
+(defn prime? [n]
+  (every? false? (map #(= (mod n %) 0) (range 2 n))))
+
+(defn prime-numbers [n]
+  (take n (filter prime? whole-numbers)))
+
+(= (prime-numbers 2) [2 3])
+
+(= (prime-numbers 5) [2 3 5 7 11])
+
+(= (last (prime-numbers 100)) 541)
