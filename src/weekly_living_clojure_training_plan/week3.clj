@@ -141,3 +141,18 @@
 (= (prime-numbers 5) [2 3 5 7 11])
 
 (= (last (prime-numbers 100)) 541)
+
+
+;;; Day 5
+;; Anagram Finder
+(defn anagram-finder [s]
+  (set
+   (map set
+        (filter #(> (count %) 1)
+                (vals (group-by sort s))))))
+
+(= (anagram-finder ["meat" "mat" "team" "mate" "eat"])
+   #{#{"meat" "team" "mate"}})
+
+(= (anagram-finder ["veer" "lake" "item" "kale" "mite" "ever"])
+   #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})
